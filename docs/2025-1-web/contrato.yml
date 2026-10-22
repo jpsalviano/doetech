@@ -1,0 +1,918 @@
+openapi: 3.0.0
+info:
+  title: DoeTech
+  description: API do backend do DoeTech
+  version: 1.0.0
+  license:
+    name: BSD-3-Clause
+  contact: {
+    name: "Felipe Lunkes",
+    url: "https://lunx.me",
+    email: "felipenldev@gmail.com"
+    }
+servers:
+  - url: http://localhost:8080
+    description: Servidor Local
+tags:
+  - name: Conta
+  - name: Contato
+  - name: Endereço
+  - name: Equipamento
+  - name: Usuário
+
+paths:
+  /usuario:
+    get:
+      summary: Lista todos os usuários
+      tags:
+        - Usuário
+      operationId: ListaUsuariosV1
+      responses:
+        '200':
+          description: Lista de usuários retornada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaRespostaUsuarios'
+
+    post:
+      summary: Cria um novo usuário
+      tags:
+        - Usuário
+      operationId: CriaUsuarioV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '201':
+          description: Usuário criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaUsuario'
+        '400':
+          description: Erro de validação
+
+  /usuario/{id}:
+    get:
+      summary: Obtém um usuário pelo id
+      tags:
+        - Usuário
+      operationId: UsuarioPorIdV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Usuário encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaUsuario'
+    put:
+      summary: Atualiza um usuário existente
+      tags:
+        - Usuário
+      operationId: AtualizaUsuariosV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Usuario'
+      responses:
+        '200':
+          description: Usuário atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaUsuario'
+        '400':
+          description: Erro de validação
+        '404':
+          description: Usuário não encontrado
+    delete:
+      summary: Remove um usuário
+      tags:
+        - Usuário
+      operationId: RemoveUsuariosV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Usuário removido com sucesso
+        '404':
+          description: Usuário não encontrado
+
+  /equipamentos:
+    get:
+      summary: Lista todos os equipamentos disponíveis
+      tags:
+        - Equipamento
+      operationId: ListaEquipamentosV1
+      responses:
+        '200':
+          description: Lista de equipamentos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaRespostaEquipamentos'
+            
+    post:
+      summary: Registra um novo equipamento
+      tags:
+        - Equipamento
+      operationId: CriaEquipamentoV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipamento'
+      responses:
+        '200':
+          description: Equipamento cadastrado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaEquipamento'
+        '400':
+          description: Erro de validação
+
+  /equipamento/{id}:
+    get:
+      summary: Obtém um equipamento existente
+      tags:
+        - Equipamento
+      operationId: ObtemEquipamentoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Equipamento obtido com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaEquipamento'
+        '404':
+          description: Equipamento não encontrado
+    put:
+      summary: Atualiza um equipamento existente
+      tags:
+        - Equipamento
+      operationId: AtualizaEquipamentoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipamento'
+      responses:
+        '200':
+          description: Equipamento atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaEquipamento'
+        '404':
+          description: Equipamento não encontrado
+    delete:
+      summary: Remove um equipamento
+      tags:
+        - Equipamento
+      operationId: RemoveEquipamentoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Equipamento removido com sucesso
+        '404': 
+          description: Equipamento não encontrado
+
+  /conta:
+    get:
+      summary: Lista todas as contas
+      tags:
+        - Conta
+      operationId: ListaContasV1
+      responses:
+        '200':
+          description: Lista de contas retornada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaRespostaContas'
+    post:
+      summary: Cria uma nova conta
+      tags:
+        - Conta
+      operationId: CriaContaV1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Conta'
+      responses:
+        '200':
+          description: Conta criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConta'
+        '400':
+          description: Erro de validação
+  /conta/{id}:
+    get:
+      summary: Obtém uma conta pelo id
+      tags:
+        - Conta
+      operationId: ContaPorIdV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Conta encontrada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConta'
+        '404':
+          description: Conta não encontrada
+    put:
+      summary: Atualiza uma conta existente
+      tags:
+        - Conta
+      operationId: AtualizaContaV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Conta'
+      responses:
+        '200':
+          description: Conta atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaConta'
+        '400':
+          description: Erro de validação
+        '404':
+          description: conta não encontrada
+    delete:
+      summary: Remove uma conta
+      tags:
+        - Conta
+      operationId: RemoveContaV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Conta removida com sucesso
+        '404':
+          description: Conta não encontrada
+
+  /conta/{id}/contatos:
+    get:
+      summary: Lista todos os contatos de uma conta
+      tags:
+        - Contato
+      operationId: ListaContatosV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Lista de contatos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaRespostaContatos'
+        '400':
+          description: Erro de validação
+  
+  /conta/{id}/contato:
+    post:
+      summary: Adiciona um contato à conta
+      tags:
+        - Contato
+      operationId: AdicionaContatoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contato'
+      responses:
+        '200':
+          description: Contato adicionado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaContato'
+        '400':
+          description: Erro de validação
+  /conta/{id}/contato/{contatoId}:
+    get:
+      summary: Obtém um contato de uma conta
+      tags:
+        - Contato
+      operationId: ObterContatoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: contatoId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Contato obtido com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaContato'
+        '404':
+          description: Contato não encontrado
+    put:
+      summary: Atualiza um contato de uma conta
+      tags:
+        - Contato
+      operationId: AtualizaContatoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: contatoId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Contato'
+      responses:
+        '200':
+          description: Contato atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaContato'
+        '400':
+          description: Erro de validação
+        '404':
+          description: Contato não encontrado
+    delete:
+      summary: Remove um contato de uma conta
+      tags:
+        - Contato
+      operationId: RemoveContatoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: contatoId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Contato removido com sucesso
+        '404':
+          description: Contato não encontrado
+
+  /conta/{id}/enderecos:
+    get:
+      summary: Lista todos os endereços de uma conta
+      tags:
+        - Endereço
+      operationId: ListaEnderecosV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Lista de endereços
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListaRespostaEnderecos'
+    post:
+      summary: Adiciona um endereço à conta
+      tags:
+        - Endereço
+      operationId: AdicionarEnderecoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+      responses:
+        '200':
+          description: Endereço adicionado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaEndereco'
+        '400':
+          description: Erro de validação
+
+  /conta/{id}/endereco/{enderecoId}:
+    get:
+      summary: Obter um endereço de uma conta
+      tags:
+        - Endereço
+      operationId: ObterEnderecoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: enderecoId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Endereço obtido com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaEndereco'
+        '404':
+          description: Endereço não encontrado
+    put:
+      summary: Atualiza um endereço de uma conta
+      tags:
+        - Endereço
+      operationId: AtualizaEnderecoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: enderecoId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Endereco'
+      responses:
+        '200':
+          description: Endereço atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RespostaEndereco'
+        '400':
+          description: Erro de validação
+        '404':
+          description: Endereço não encontrado
+        
+    delete:
+      summary: Remove um endereço de uma conta
+      tags:
+        - Endereço
+      operationId: RemoveEnderecoV1
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: enderecoId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '204':
+          description: Endereço removido com sucesso
+        '404':
+          description: Endereço não encontrado
+components:
+
+  schemas:
+
+    ListaRespostaContatos:
+      type: array
+      items:
+            $ref: "#/components/schemas/RespostaContato"
+
+    RespostaContato:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Contato'
+        - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "fadf0d95-efec-4d40-bf95-c666179c3f04"
+          description: "id único da entidade"
+        criadoEm:
+              type: integer
+              format: int32
+              example: "1777775555552"
+              description: "Data da criação"
+        atualizadoEm:
+          type: integer
+          format: int32
+          example: "1777775555552"
+          description: "Data de atualização"
+    
+    Contato:
+      type: object
+      required:
+        - codigo_pais
+        - codigo_estado
+        - telefone
+        - disponibilizar
+      properties:
+        codigo_pais:
+          type: string
+          description: "Código de área do país"
+          example: "+55"
+        codigo_estado:
+          type: string
+          description: "Código de área"
+          example: "31"
+        telefone:
+          type: string
+          description: "Número de telefone"
+          example: "3333-3333"
+        disponibilizar:
+          type: boolean
+          description: "Disponibilizar para outros usuários"
+          example: true
+
+    ListaRespostaEnderecos:
+      type: array
+      items:
+            $ref: "#/components/schemas/RespostaEndereco"
+
+    RespostaEndereco:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Endereco'
+        - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: "fadf0d95-efec-4d40-bf95-c666179c3f04"
+          description: "id único da entidade"
+        criadoEm:
+              type: integer
+              format: int32
+              example: "1777775555552"
+              description: "Data da criação"
+        atualizadoEm:
+          type: integer
+          format: int32
+          example: "1777775555552"
+          description: "Data de atualização"
+
+    Endereco:
+      type: object
+      required:
+        - cep
+        - tipo
+        - logradouro
+        - numero
+        - bairro
+        - cidade
+        - estado
+        - pais
+        - disponibilizar
+      properties:
+        cep:
+          type: string
+          description: "Código postal"
+          example: "30000-000"
+        tipo:
+          type: string
+          enum: [RUA, AVENIDA, BECO]
+          description: "Tipo de logradouro"
+          example: RUA
+        logradouro:
+          type: string
+          description: "Logradouro"
+          example: "Avenida do Contorno"
+        numero:
+          type: string
+          description: "Número com complemento"
+          example: "75 apartamento 205"
+        bairro:
+          type: string
+          description: "Bairro"
+          example: "Castelo"
+        cidade:
+          type: string
+          description: "Cidade"
+          example: "Belo Horizonte"
+        estado:
+          type: string
+          description: "Estado"
+          example: "MG"
+        pais:
+          type: string
+          description: "País"
+          example: "Brasil"
+        disponibilizar:
+          type: boolean
+          description: "Disponibilizar endereço"
+          example: true
+
+    ListaRespostaUsuarios:
+      type: array
+      items:
+            $ref: "#/components/schemas/RespostaUsuario"
+
+    RespostaUsuario:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Usuario'
+        - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "id da conta"
+          example: "76fdfa03-74fc-4ff9-aa1a-4c717aeb8dfa"
+        criadoEm:
+              type: integer
+              format: int32
+              example: "1777775555552"
+              description: "Data da criação"
+        atualizadoEm:
+          type: integer
+          format: int32
+          example: "1777775555552"
+          description: "Data de atualização"
+
+    Usuario:
+      type: object
+      required:
+        - email
+        - senha
+        - tipo
+        - permissao
+      properties:
+        email:
+          type: string
+          description: "E-mail utilizado para cadastrar"
+          example: "teste@gmail.com"
+        senha:
+          type: string
+          description: "Senha informada pelo usuário"
+          example: "senha"
+        tipo:
+          type: string
+          enum: [ADMIN, DOADOR, BENEFICIARIO]
+          description: "Tipo de conta"
+          example: ADMIN
+        permissao:
+          type: string
+          enum: [ADMIN, COMUM]
+          description: "Permissão do usuário"
+          example: COMUM
+
+    ListaRespostaEquipamentos:
+      type: array
+      items:
+            $ref: "#/components/schemas/RespostaEquipamento"
+
+    RespostaEquipamento:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Equipamento'
+        - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "id da conta"
+          example: "76fdfa03-74fc-4ff9-aa1a-4c717aeb8dfa"
+        criadoEm:
+              type: integer
+              format: int32
+              example: "1777775555552"
+              description: "Data da criação"
+        atualizadoEm:
+          type: integer
+          format: int32
+          example: "1777775555552"
+          description: "Data de atualização"
+
+    Equipamento:
+      type: object
+      required:
+        - conta_id
+        - descricao
+        - tipo
+        - status
+        - data_disponibilizacao
+        - data_doacao
+        - data_entrega
+      properties:
+        conta_id:
+          type: string
+          format: uuid
+          description: "id da conta"
+          example: "1cd82ab2-f2bb-4aed-b67f-cba47e219163"
+        descricao:
+          type: string
+          description: "Descrição/nome do equipamento"
+          example: "Computador Desktop HP com processador Ryzen 7"
+        tipo:
+          type: string
+          enum:
+            - COMPUTADOR
+            - CELULAR
+            - AUDIO_VIDEO
+          description: "Tipo do equipamento"
+          example: COMPUTADOR
+        status:
+          type: string
+          description: "Status de disponibilização do equipamento"
+          enum: 
+            - DISPONIVEL
+            - DOADO
+            - EM_PROCESSO
+            - INDISPONIVEL
+        data_disponibilizacao:
+          type: string
+          format: int32
+          description: "Data de disponibilização do equipamento"
+          example: "1777775555552"
+        data_entrega:
+          type: string
+          format: int32
+          description: "Data de entrega do equipamento ao receptor"
+          example: "1777775555552"
+        data_doacao:
+          type: string
+          format: int32
+          description: "Data do início do processo de doação"
+          example: "1777775555552"
+
+    RespostaConta:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/Conta'
+        - type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: "id da conta"
+          example: "76fdfa03-74fc-4ff9-aa1a-4c717aeb8dfa"
+        criadoEm:
+              type: integer
+              format: int32
+              example: "1777775555552"
+              description: "Data da criação"
+        atualizadoEm:
+          type: integer
+          format: int32
+          example: "1777775555552"
+          description: "Data de atualização"
+
+    ListaRespostaContas:
+      type: array
+      items:
+            $ref: "#/components/schemas/RespostaConta"
+    Conta:
+      type: object
+      properties:
+        user_id:
+          type: string
+          format: uuid
+          description: "id do usuário"
+          example: "73134022-2088-47c8-bfbe-3965452c55f8"
+        nome:
+          type: string
+          description: "Nome do usuário/nome fantasia"
+          example: "Maria"
+        razao_social:
+          type: string
+          description: "Razão social, caso empresa" 
+          example: "Padaria Zelda"
+        cpf:
+          type: string
+          description: "CPF da conta"
+          example: "111.111.111-11"
+        cnpj:
+          type: string
+          description: "CNPJ da empresa"

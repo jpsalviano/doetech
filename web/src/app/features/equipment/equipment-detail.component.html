@@ -1,0 +1,211 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h2>Detalhes do Equipamento</h2>
+      <button (click)="goBack()" class="btn btn-secondary">
+        ← Voltar
+      </button>
+    </div>
+
+    @if (loading) {
+    <div class="loading-spinner">
+      Carregando equipamento...
+    </div>
+    } @else if (equipment) {
+    <div class="equipment-info">
+      <div class="info-section">
+        <h3>Foto do Equipamento</h3>
+        <div class="equipment-image-container">
+          <div class="equipment-image-wrapper">
+            @if (equipmentImageUrl) {
+            <img [src]="equipmentImageUrl" alt="Foto do equipamento" class="equipment-image" />
+            @if (isDonor) {
+            <button type="button" class="btn btn-danger btn-sm remove-image-btn" (click)="removeEquipmentImage()"
+              title="Remover imagem">
+              ✕
+            </button>
+            }
+            } @else {
+            <div class="no-image-placeholder rectangular">
+              <i class="placeholder-icon">📷</i>
+              <p>Nenhuma foto disponível</p>
+            </div>
+            }
+          </div>
+
+          @if (isDonor) {
+          <div class="image-upload-controls">
+            <input type="file" id="equipmentImageInput" accept="image/*" (change)="onFileSelected($event)"
+              class="file-input" #fileInput />
+
+            <button type="button" class="btn btn-primary btn-sm" (click)="fileInput.click()">
+              Escolher Arquivo
+            </button>
+
+            @if (selectedFile) {
+            <button type="button" class="btn btn-primary btn-sm" (click)="uploadEquipmentImage()"
+              [disabled]="isUploadingImage">
+              @if (isUploadingImage) {
+              Enviando...
+              } @else {
+              Salvar Imagem
+              }
+            </button>
+            }
+          </div>
+
+          @if (isUploadingImage) {
+          <div class="upload-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="uploadProgress"></div>
+            </div>
+            <small>Enviando imagem...</small>
+          </div>
+          }
+          }
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Informações Básicas</h3>
+        <div class="info-grid">
+          <div class="info-group">
+            <label>Descrição</label>
+            <p>{{ equipment.description }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Tipo</label>
+            <p class="equipment-type">{{ getTypeLabel(equipment.type) }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Status Atual</label>
+            <div class="equipment-meta">
+              <span class="equipment-status" [class]="getStatusClass(equipment.status)">
+                {{ getStatusLabel(equipment.status) }}
+              </span>
+            </div>
+          </div>
+
+          @if (donorAccount && !isLoadingDonor) {
+          <div class="info-group">
+            <label>Doador</label>
+            <p>{{ donorAccount.name || donorAccount.businessName }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Localização</label>
+            <p>{{ donorAccount.address.city }}, {{ donorAccount.address.state }}</p>
+          </div>
+          } @else if (isLoadingDonor) {
+          <div class="info-group">
+            <label>Doador</label>
+            <p>Carregando informações...</p>
+          </div>
+          }
+        </div>
+      </div>
+      <div class="info-section">
+        <h3>Datas</h3>
+        <div class="info-grid">
+          <div class="info-group">
+            <label>Data de Disponibilidade</label>
+            <p>{{ formatDate(equipment.avaiabilityDate) }}</p>
+          </div>
+
+          @if (equipment.donationDate) {
+          <div class="info-group">
+            <label>Data de Doação</label>
+            <p>{{ formatDate(equipment.donationDate) }}</p>
+          </div>
+          }
+
+          <div class="info-group">
+            <label>Criado em</label>
+            <p>{{ formatDateTime(equipment.createdAt) }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Última Atualização</label>
+            <p>{{ formatDateTime(equipment.updatedAt) }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="actions-section">
+        <h3>Ações</h3>
+
+        @if (error) {
+        <div class="error-message">
+          {{ error }}
+          <button type="button" class="btn btn-sm btn-link" (click)="clearError()">
+            ✕ Fechar
+          </button>
+        </div>
+        }
+
+        @if (!isReceptor) {
+        @if (equipment.status != inProgressStatus) {
+        <div class="status-update">
+          <h4>Atualizar Status</h4>
+          <form [formGroup]="statusForm" (ngSubmit)="onUpdateStatus()" class="status-form">
+            <div class="form-group">
+              <label class="form-label">Novo Status</label>
+              <select formControlName="status" class="form-control">
+                @for (status of availableStatuses; track status.value) {
+                <option [value]="status.value">{{ status.label }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Motivo da Alteração</label>
+              <textarea formControlName="reason" class="form-control" rows="3"
+                placeholder="Descreva o motivo da alteração do status..."
+                [class.is-invalid]="statusForm.get('reason')?.invalid && statusForm.get('reason')?.touched">
+                    </textarea>
+              @if (statusForm.get('reason')?.invalid && statusForm.get('reason')?.touched) {
+              <div class="invalid-feedback">
+                @if (statusForm.get('reason')?.errors?.['required']) {
+                O motivo é obrigatório.
+                }
+                @if (statusForm.get('reason')?.errors?.['minlength']) {
+                O motivo deve ter pelo menos 10 caracteres.
+                }
+                @if (statusForm.get('reason')?.errors?.['maxlength']) {
+                O motivo deve ter no máximo 500 caracteres.
+                }
+              </div>
+              }
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="statusForm.invalid || isUpdatingStatus">
+              @if (isUpdatingStatus) {
+              Atualizando...
+              } @else {
+              Atualizar Status
+              }
+            </button>
+          </form>
+        </div>
+        } @else {
+        @if (donation) {
+        <button class="btn btn-primary" [routerLink]="['/donor/donation', donation.id]">
+          Ver doação vinculada
+        </button>
+        }
+        }
+        } @else {
+        <div class="receptor-actions">
+          <p>Interessado neste equipamento? Manifeste seu interesse e o doador será notificado.</p>
+          <button (click)="onShowInterest()" class="btn btn-primary">
+            Solicitar Doação
+          </button>
+        </div>
+        }
+
+      </div>
+    </div>
+    }
+  </div>
+</div>

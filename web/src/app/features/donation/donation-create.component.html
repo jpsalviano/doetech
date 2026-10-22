@@ -1,0 +1,93 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <div>
+        <h1>Finalizar Solicitação de Doação</h1>
+        <p>Revise os equipamentos selecionados e confirme sua solicitação</p>
+      </div>
+    </div>
+
+    @if (isLoadingEquipments) {
+    <div class="loading-state">
+      <p>Carregando detalhes dos equipamentos...</p>
+    </div>
+    } @else if (donationCart && selectedEquipments.length > 0) {
+    <div class="donation-content">
+      <div class="equipment-summary-section">
+        <h2>Equipamentos Selecionados</h2>
+        <div class="summary-info">
+          <span class="total-items">{{ totalItems }} equipamento(s) selecionado(s)</span>
+          <button (click)="onClearAll()" type="button" class="btn btn-secondary">
+            Limpar Todos
+          </button>
+        </div>
+
+        @if (donorAccount) {
+        <div class="donor-summary">
+          <h3>Informações do Doador</h3>
+          <div class="donor-info">
+            <p class="donor-name">{{ donorAccount.name || donorAccount.businessName }}</p>
+            <p class="donor-location">{{ donorAccount.address.city }}, {{ donorAccount.address.state }}</p>
+          </div>
+        </div>
+        }
+
+        <div class="equipment-list">
+          @for (equipment of selectedEquipments; track equipment.id) {
+          <div class="equipment-item">
+            <div class="equipment-info">
+              <div class="equipment-header">
+                <span class="equipment-type">{{ getEquipmentTypeLabel(equipment.type) }}</span>
+                <button (click)="onRemoveEquipment(equipment.id)" type="button" class="btn btn-secondary">
+                  Remover
+                </button>
+              </div>
+              <p class="equipment-description">{{ equipment.description }}</p>
+              <div class="equipment-meta">
+                <small>Disponível desde: {{ formatDate(equipment.avaiabilityDate) }}</small>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="donation-form-section">
+        <h2>Confirmar Solicitação</h2>
+
+        @if (error) {
+        <div class="error-message">{{ error }}</div>
+        }
+
+        <div class="confirmation-content">
+          <p>Você está prestes a solicitar os equipamentos listados acima. O doador será notificado sobre sua
+            solicitação.
+          </p>
+
+          <div class="form-actions">
+            <button (click)="onCancel()" type="button" class="btn btn-secondary">
+              Voltar
+            </button>
+            <button (click)="onSubmitDonation()" type="button" class="btn btn-primary" [disabled]="isSubmitting">
+              @if (isSubmitting) {
+              Enviando...
+              } @else {
+              Confirmar Solicitação
+              }
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    } @else {
+    <div class="empty-state">
+      <h2>Nenhum Equipamento Selecionado</h2>
+      <p>Você precisa selecionar pelo menos um equipamento para fazer uma solicitação de doação.</p>
+      <button (click)="onCancel()" type="button" class="btn btn-primary">
+        Buscar Equipamentos
+      </button>
+    </div>
+    }
+  </div>
+
+</div>

@@ -1,0 +1,13 @@
+.landing-container {
+  /* a imagem vem do template: caminho relativo à base do site (/doetech/) */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: grayscale(0.02) saturate(0.7);
+  min-height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-shadow: 0 0 5px black;
+  color: var(--white);
+}

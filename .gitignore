@@ -1,0 +1,29 @@
+# IDEs
+.idea/
+.vs/
+*.user
+*.suo
+
+# Build e cache do .NET
+bin/
+obj/
+out/
+*.log
+TestResults/
+
+# Configurações locais
+appsettings.Local.json
+appsettings.Secrets.json
+secrets.json
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Temporários
+*.tmp
+*.bak
+
+# Fronts compilados, copiados para a API só no desenvolvimento local
+api/wwwroot/

@@ -1,0 +1,11 @@
+@if (shouldShowRegularLayout) {
+  <app-header></app-header>
+  <app-main>
+    <router-outlet></router-outlet>
+  </app-main>
+  <app-footer></app-footer>
+  <app-toast-container></app-toast-container>
+} @else {
+  <!-- Admin routes will handle their own layout -->
+  <router-outlet></router-outlet>
+}

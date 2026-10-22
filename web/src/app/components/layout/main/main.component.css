@@ -1,0 +1,9 @@
+.main-content {
+  padding: 0;
+}
+
+@media (max-width: 900px) {
+  .main-content {
+    min-height: calc(50vh);
+  }
+}

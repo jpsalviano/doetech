@@ -1,0 +1,98 @@
+.admin-application {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-header {
+  background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+  color: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.admin-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.admin-logo h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.admin-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-user {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.admin-main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Admin-specific button styles */
+.admin-application .btn {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-application .btn-outline-light {
+  border-color: rgba(255, 255, 255, 0.5);
+  color: white;
+}
+
+.admin-application .btn-outline-light:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .admin-header-content {
+    padding: 1rem;
+  }
+  
+  .admin-container {
+    padding: 0 1rem;
+  }
+  
+  .admin-actions {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+  
+  .admin-user {
+    font-size: 0.875rem;
+  }
+}

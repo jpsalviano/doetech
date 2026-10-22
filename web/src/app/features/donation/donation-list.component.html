@@ -1,0 +1,105 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h2>Minhas Doações</h2>
+    </div>
+
+    @if (loading) {
+    <div class="loading-spinner">Carregando doações...</div>
+    } @else if (error) { 
+    <div class="error-message">{{ error }}</div>
+    <button (click)="refreshDonations()" type="button" class="btn btn-secondary">
+      Tentar Novamente
+    </button>
+    } @else {
+    @if (donations.length === 0) { 
+    <div class="empty-state">
+      <p>Você ainda não iniciou nenhum processo de doação.</p>
+      <button routerLink="/donor/equipment" type="button" class="btn btn-primary">
+        Visualizar Equipamentos Cadastrados
+      </button>
+    </div>
+    } @else {
+    <div class="donation-grid">
+      @for (donation of donations; track donation.id) {
+      <div class="donation-card" (click)="viewDonation(donation.id)">
+        <div class="donation-header">
+          <div class="donation-status-container">
+            <span class="donation-status" [class]="getStatusClass(donation.status)">
+              {{ getStatusLabel(donation.status) }}
+            </span>
+            <span class="donation-date">{{ formatDate(donation.createdAt) }}</span>
+          </div>
+        </div>
+        
+        <div class="donation-content">
+          <div class="donation-recipient">
+            @if (getRecipientInfo(donation.recipientAccountId)) {
+            <div class="recipient-info">
+              <h4>Receptor:</h4>
+              <span class="recipient-name">
+                {{ getRecipientInfo(donation.recipientAccountId)!.name ||
+                getRecipientInfo(donation.recipientAccountId)!.businessName }}
+              </span>
+              <span class="recipient-location">
+                {{ getRecipientInfo(donation.recipientAccountId)!.address.city }}, 
+                {{ getRecipientInfo(donation.recipientAccountId)!.address.state }}
+              </span>
+            </div>
+            } @else {
+            <div class="recipient-info loading">
+              <span>Carregando informações do receptor...</span>
+            </div>
+            }
+          </div>
+
+          <div class="donation-equipments">
+            <h4>Equipamentos ({{ getTotalEquipments(donation.id) }}):</h4>
+            <div class="equipment-list">
+              @for (equipment of getDonationEquipments(donation.id); track equipment.id) {
+              <div class="equipment-item">
+                <span class="equipment-type">{{ getEquipmentTypeLabel(equipment.type) }}</span>
+                <span class="equipment-description">{{ equipment.description }}</span>
+              </div>
+              }
+              @if (getDonationEquipments(donation.id).length === 0) {
+              <div class="equipment-loading">
+                <span>Carregando equipamentos...</span>
+              </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div class="donation-footer">
+          <div class="donation-dates">
+            @if (donation.updatedAt && donation.updatedAt !== donation.createdAt) {
+            <small>Atualizada em: {{ formatDate(donation.updatedAt) }}</small>
+            }
+            @if (donation.finishedAt) {
+            <small>Finalizada em: {{ formatDate(donation.finishedAt) }}</small>
+            }
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm">
+            Ver Detalhes
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+
+    @if (donations.length > 0 && hasMoreItems) { 
+    <div class="pagination-controls">
+      <button (click)="loadMoreDonations()" type="button" class="btn btn-secondary" [disabled]="loading">
+        @if (loading) {
+        Carregando...
+        } @else {
+        Carregar Mais
+        }
+      </button>
+    </div>
+    }
+    }
+    }
+  </div>
+</div>

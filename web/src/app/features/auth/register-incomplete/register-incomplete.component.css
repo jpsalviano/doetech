@@ -1,0 +1,155 @@
+.registration-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: var(--spacing-xl) var(--spacing-md);
+  min-height: 70vh;
+}
+
+.registration-card {
+  background-color: var(--bg-color-card);
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: var(--spacing-xl);
+  width: 100%;
+  max-width: 800px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+  font-size: 1.75rem;
+}
+
+.profile-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.profile-section h3, .profile-section h4 {
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.info-group label {
+  font-weight: 500;
+  color: var(--text-color-secondary);
+  font-size: 0.875rem;
+}
+
+.info-group p {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin: 0;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.account-form {
+  margin-top: var(--spacing-md);
+}
+
+.radio-group {
+  display: flex;
+  gap: var(--spacing-lg);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-md-3, .col-md-4, .col-md-6, .col-md-8 {
+  position: relative;
+  width: 100%;
+  padding-right: var(--spacing-sm);
+  padding-left: var(--spacing-sm);
+}
+
+.col-md-3 {
+  flex: 0 0 25%;
+  max-width: 25%;
+}
+
+.col-md-4 {
+  flex: 0 0 33.333333%;
+  max-width: 33.333333%;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.col-md-8 {
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%;
+}
+
+.form-check {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding-left: 0;
+}
+
+.form-check-input {
+  width: auto;
+  margin-top: 0;
+}
+
+.form-check-label {
+  margin-bottom: 0;
+}
+
+.form-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+@media (max-width: 768px) {
+  .col-md-3, .col-md-4, .col-md-6, .col-md-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .registration-card {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 576px) {
+  .registration-container {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .registration-card {
+    padding: var(--spacing-md);
+  }
+}

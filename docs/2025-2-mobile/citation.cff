@@ -1,0 +1,28 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: DoeTech Mobile
+authors:
+  - family-names: de Carvalho Rosa
+    given-names: Caio Augusto
+  - family-names: Marcelino Azevedo 
+    given-names: Diovane
+  - family-names: Nery Lunkes
+    given-names: Felipe Miguel
+  - family-names: Fernandes Salviano
+    given-names: João Paulo
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Gonçalves de Pontes
+    given-names: Diego Roberto
+keywords:
+  - Doação
+  - Tecnologia
+  - Objetivos do Milênio
+  - Reutilização
+repository-code: https://github.com/ICEI-PUC-Minas-PMV-ADS/pmv-ads-2025-2-e3-proj-doetech-t4
+license: BSD-3-CLAUSE
+version: 1.0.0
+
+date-released: 2025-12-04
+
+

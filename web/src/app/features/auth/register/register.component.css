@@ -1,0 +1,139 @@
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+}
+
+.progress-steps::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--border-color);
+  z-index: 1;
+}
+
+.step {
+  background-color: var(--bg-color-card);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-size: 0.875rem;
+}
+
+.step.active {
+  background-color: var(--primary-color-alt);
+  color: var(--white);
+  font-weight: bold;
+}
+
+.step.completed {
+  background-color: var(--success-color);
+  color: var(--white);
+  border-color: var(--success-color);
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.col-md-3, .col-md-4, .col-md-6, .col-md-8 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media (min-width: 768px) {
+  .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .col-md-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+
+  .col-md-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+
+  .col-md-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%;
+  }
+}
+
+.radio-group {
+  display: flex;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.radio-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+h4 {
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-lg);
+}
+
+.button-group .btn {
+  flex: 1;
+}
+
+.saved-credentials-info {
+  margin-bottom: var(--spacing-lg);
+}
+
+@media (max-width: 767px) {
+  .col-md-3, .col-md-4, .col-md-6, .col-md-8 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+  
+  .radio-group {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  .progress-steps {
+    font-size: 0.8rem;
+  }
+
+  .step {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
