@@ -1,0 +1,19 @@
+<div class="modal-backdrop" *ngIf="isOpen">
+  <div class="modal">
+    <button class="modal-close" (click)="onClose()">&times;</button>
+    <div class="modal-content">
+      <div class="modal-image">
+        <img [src]="content[page].image" alt="Imagem modal" />
+      </div>
+      <div class="modal-text-container">
+        <h2>{{ content[page].title }}</h2>
+        <div class="modal-text" [innerHTML]="content[page].body"></div>
+      </div>
+    </div>
+    <div class="modal-carousel">
+      <button (click)="prevPage()" [disabled]="page === 0">&lsaquo;</button>
+      <div>{{ page + 1 }} / {{ content.length }}</div>
+      <button (click)="nextPage()" [disabled]="page === content.length - 1">&rsaquo;</button>
+    </div>
+  </div>
+</div>

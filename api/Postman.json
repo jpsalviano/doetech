@@ -1,0 +1,1438 @@
+{
+	"info": {
+		"_postman_id": "9e513a60-6fb7-41c6-b5a1-aad1d0cda408",
+		"name": "DoeTech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28758213",
+		"_collection_link": "https://interstellar-robot-632943.postman.co/workspace/Doetech~ee2ecfb9-6ef7-4ed9-9116-b9e2acc4e3f7/collection/28758213-9e513a60-6fb7-41c6-b5a1-aad1d0cda408?action=share&source=collection_link&creator=28758213"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Save User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"johnDoe@gmail.com\",\n    \"password\": \"Teste123.\",\n    \"isAdmin\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Email\": \"johnDoe@gmail.com\",\n    \"Password\": \"Teste123.\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token-removido",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "bc41347f-2686-4b5b-8bec-7553ca14e015"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token-removido",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token-removido",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user/query?isAdmin=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user",
+								"query"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "felipelunkes@gmail.com",
+									"description": "email equals",
+									"disabled": true
+								},
+								{
+									"key": "isAdmin",
+									"value": "true"
+								},
+								{
+									"key": "createdAtFrom",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAtTo",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"johnDoe@gmail.com\",\n    \"password\": \"Teste123\",\n    \"isAdmin\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "bc41347f-2686-4b5b-8bec-7553ca14e015"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reset passsword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n    \"email\": \"johnDoe@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/user/recover",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"user",
+								"recover"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Save Account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"ded7e2c4-9a64-42f8-81e2-1529bcec16e2\",\n    \"name\": \"Felipe Lunkes\",\n    \"cpf\": \"12000000000\",\n    \"birthdayDate\": 1755552556365,\n    \"role\": \"Donor\",\n    \"phone\": {\n        \"countryCode\": \"55\",\n        \"stateCode\": \"31\",\n        \"phoneNumber\": \"31313131\"\n    },\n    \"address\": {\n        \"street\": \"Avenida do Contorno\",\n        \"number\": \"2000A\",\n        \"city\": \"Belo Horizonte\",\n        \"district\": \"Centro\",\n        \"state\": \"Minas Gerais\",\n        \"complement\": \"Loja 2\",\n        \"postalCode\": \"1212121212\"\n    },\n    \"allowsAdvertising\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"d13bf956-2893-49a4-aa34-507b73fd4189\",\n    \"name\": \"Felipe Lunkes\",\n    \"cpf\": \"10000000000\",\n    \"allowsAdvertising\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/:accountId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								":accountId"
+							],
+							"variable": [
+								{
+									"key": "accountId",
+									"value": "7eece458-3fdc-4a2a-9fc5-a0f67089ace0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account by userId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/user/:userId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								"user",
+								":userId"
+							],
+							"variable": [
+								{
+									"key": "userId",
+									"value": "4bab1223-279c-4959-9eed-e61ecfb111ed"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "token-removido",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/:accountId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								":accountId"
+							],
+							"variable": [
+								{
+									"key": "accountId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query Accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/query?name=Felipe&createdAtFrom&createdAtTo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								"query"
+							],
+							"query": [
+								{
+									"key": "userId",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "name",
+									"value": "Felipe",
+									"description": "name likefull"
+								},
+								{
+									"key": "businessName",
+									"value": null,
+									"description": "businessName likefull",
+									"disabled": true
+								},
+								{
+									"key": "allowsAdvertising",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAtFrom",
+									"value": null
+								},
+								{
+									"key": "createdAtTo",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"eceb5eff-1a25-4147-95d9-df0fb46f4f4d\",\n    \"name\": \"Felipe Lunkes\",\n    \"cpf\": \"12000000000\",\n    \"birthdayDate\": 1755552556365,\n    \"phone\": {\n        \"countryCode\": \"55\",\n        \"stateCode\": \"31\",\n        \"phoneNumber\": \"31313131\"\n    },\n    \"address\": {\n        \"street\": \"Avenida do Contorno\",\n        \"number\": \"2000A\",\n        \"city\": \"Belo Horizonte\",\n        \"district\": \"Centro\",\n        \"state\": \"Minas Gerais\",\n        \"complement\": \"Loja 2\"\n    },\n    \"allowsAdvertising\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/:accountId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								":accountId"
+							],
+							"variable": [
+								{
+									"key": "accountId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deactivate account",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"ded7e2c4-9a64-42f8-81e2-1529bcec16e2\",\n    \"name\": \"Felipe Lunkes\",\n    \"cpf\": \"12000000000\",\n    \"birthdayDate\": 1755552556365,\n    \"role\": \"Donor\",\n    \"phone\": {\n        \"countryCode\": \"55\",\n        \"stateCode\": \"31\",\n        \"phoneNumber\": \"31313131\"\n    },\n    \"address\": {\n        \"street\": \"Avenida do Contorno\",\n        \"number\": \"2000A\",\n        \"city\": \"Belo Horizonte\",\n        \"district\": \"Centro\",\n        \"state\": \"Minas Gerais\",\n        \"complement\": \"Loja 2\",\n        \"postalCode\": \"1212121212\"\n    },\n    \"allowsAdvertising\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/:accountId/deactivate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								":accountId",
+								"deactivate"
+							],
+							"variable": [
+								{
+									"key": "accountId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"ded7e2c4-9a64-42f8-81e2-1529bcec16e2\",\n    \"name\": \"Felipe Lunkes\",\n    \"cpf\": \"12000000000\",\n    \"birthdayDate\": 1755552556365,\n    \"role\": \"Donor\",\n    \"phone\": {\n        \"countryCode\": \"55\",\n        \"stateCode\": \"31\",\n        \"phoneNumber\": \"31313131\"\n    },\n    \"address\": {\n        \"street\": \"Avenida do Contorno\",\n        \"number\": \"2000A\",\n        \"city\": \"Belo Horizonte\",\n        \"district\": \"Centro\",\n        \"state\": \"Minas Gerais\",\n        \"complement\": \"Loja 2\",\n        \"postalCode\": \"1212121212\"\n    },\n    \"allowsAdvertising\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/account/:accountId/activate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"account",
+								":accountId",
+								"activate"
+							],
+							"variable": [
+								{
+									"key": "accountId",
+									"value": "991c2aff-cc97-48da-acfc-83f84df1ed12"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Equipment",
+			"item": [
+				{
+					"name": "Save Equipment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \"Notebbok Dell x40\",\r\n    \"donorAccountId\": \"92960cae-9586-4e29-8ec5-400036a46f20\",\r\n    \"type\": \"Notebook\",\r\n    \"status\": \"Available\",\r\n    \"avaiabilityDate\": 1747698043,\r\n    \"createdAt\": 1747698043,\r\n    \"updatedAt\": 1747698043337\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/equipment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"equipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Equipments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/equipment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"equipment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Equipment By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/equipment/query/?equipmentId=9a37d988-3c72-421b-a536-7f6486c045a5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"equipment",
+								"query",
+								""
+							],
+							"query": [
+								{
+									"key": "equipmentId",
+									"value": "9a37d988-3c72-421b-a536-7f6486c045a5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Equipment Status",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"e5c0fc10-a9aa-4996-9626-018d856505e6\",\r\n    \"donorAccountId\": \"92960cae-9586-4e29-8ec5-400036a46f20\",\r\n    \"description\": \"Notebbok Dell x40\",\r\n    \"type\": \"Notebook\",\r\n    \"status\": \"Available\",\r\n    \"avaiabilityDate\": 1747698043,\r\n    \"createdAt\": 1747698043,\r\n    \"updatedAt\": 1749417577230,\r\n    \"removed\": false,\r\n    \"rowVersion\": \"CN2m0ixBvdQ=\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/equipment/:equipmentId/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"equipment",
+								":equipmentId",
+								"status"
+							],
+							"variable": [
+								{
+									"key": "equipmentId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Equipment By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/equipment/?equipmentId=9a37d988-3c72-421b-a536-7f6486c045a5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"equipment",
+								""
+							],
+							"query": [
+								{
+									"key": "equipmentId",
+									"value": "9a37d988-3c72-421b-a536-7f6486c045a5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Equipment By Query",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Donations",
+			"item": [
+				{
+					"name": "Save Donation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipientAccountId\": \"f5b07593-3505-40ee-a77d-b08e2d18fc8d\",\r\n    \"equipmentIds\": [\r\n        \"a74e910d-562f-49f7-8986-e727c8d81153\"\r\n\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/donation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"donation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Donations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/donation",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"donation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Donation By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipientAccountId\": \"66e9a819-e88b-4f45-85da-ac6638cb202c\",\r\n    \"equipments\": [\r\n        \"6c3e8e2d-99b1-4026-9202-7cdc7de8429e\",\r\n        \"5b6767aa-9160-42d8-9697-3a67c65eb269\"        \r\n        ],\r\n    \"status\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/donation?requestId=d655f424-60b7-4aed-9d64-af69a880d1a7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"donation"
+							],
+							"query": [
+								{
+									"key": "requestId",
+									"value": "d655f424-60b7-4aed-9d64-af69a880d1a7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Donation",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipientAccountId\": \"8e90c11a-8472-4497-a3c6-5beeda8ca1ff\",\r\n    \"equipmentIds\": [\r\n        \"eae19eeb-8e18-4852-b1d5-289873a4b447\",\r\n        \"8f8a04f0-9453-46de-93ff-ef507a148602\"\r\n\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/donation/5a8e27c3-ada2-49bf-8194-c18a2474a261",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"donation",
+								"5a8e27c3-ada2-49bf-8194-c18a2474a261"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Donation By Id",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"recipientAccountId\": \"66e9a819-e88b-4f45-85da-ac6638cb202c\",\r\n    \"equipments\": [\r\n        \"6c3e8e2d-99b1-4026-9202-7cdc7de8429e\",\r\n        \"5b6767aa-9160-42d8-9697-3a67c65eb269\"        \r\n        ],\r\n    \"status\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/donation/status/?donationId=d655f424-60b7-4aed-9d64-af69a880d1a7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"donation",
+								"status",
+								""
+							],
+							"query": [
+								{
+									"key": "donationId",
+									"value": "d655f424-60b7-4aed-9d64-af69a880d1a7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Query donations",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"recipientAccountId\": null,\n    \"donorAccountId\": null,\n    \"equipmentIds\": null,\n    \"status\": null,\n    \"createdAtFrom\": null,\n    \"createdAtTo\": null,\n    \"page\": null,\n    \"pageSize\": null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/donation/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"donation",
+								"query"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "Create chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"senderAccountId\": \"92960cae-9586-4e29-8ec5-400036a46f20\",\n    \"receiverAccountId\": \"4111ede7-655b-4b3e-92bf-6bd8c9e08b7e\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/chat",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/chat/:chatId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"chat",
+								":chatId"
+							],
+							"variable": [
+								{
+									"key": "chatId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get aggregating by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/chat/:chatId/aggregate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"chat",
+								":chatId",
+								"aggregate"
+							],
+							"variable": [
+								{
+									"key": "chatId",
+									"value": "fb264a8e-de12-4112-986f-bd92ac0d6bd0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/chat/:chatId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"chat",
+								":chatId"
+							],
+							"variable": [
+								{
+									"key": "chatId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all by account",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/chat/:accountId/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"chat",
+								":accountId",
+								"all"
+							],
+							"variable": [
+								{
+									"key": "accountId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Message",
+			"item": [
+				{
+					"name": "Create message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"chatId\": \"\",\n   \"accountId\": \"\",\n   \"content\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get by id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/message/:messageId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"message",
+								":messageId"
+							],
+							"variable": [
+								{
+									"key": "messageId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove by id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/message/:messageId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"message",
+								":messageId"
+							],
+							"variable": [
+								{
+									"key": "messageId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Report",
+			"item": [
+				{
+					"name": "Get Equipments Report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/report/equipments?addressState=Minas Gerais",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"report",
+								"equipments"
+							],
+							"query": [
+								{
+									"key": "addressState",
+									"value": "Minas Gerais"
+								},
+								{
+									"key": "type",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAtFrom",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAtTo",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Donations Report",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/report/donations?addressState=São Paulo",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"report",
+								"donations"
+							],
+							"query": [
+								{
+									"key": "addressState",
+									"value": "São Paulo"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/v1/doetech/report/accounts?addressState=Minas Gerais",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"rest",
+								"v1",
+								"report",
+								"accounts"
+							],
+							"query": [
+								{
+									"key": "addressState",
+									"value": "Minas Gerais"
+								},
+								{
+									"key": "createdAtFrom",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "createdAtTo",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "token-removido",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

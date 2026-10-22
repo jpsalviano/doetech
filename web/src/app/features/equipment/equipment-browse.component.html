@@ -1,0 +1,120 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <div>
+        <h1>Equipamentos Disponíveis</h1>
+        <p>Encontre o equipamento que você precisa</p>
+      </div>
+    </div>
+
+    @if (getSelectedCount() > 0) {
+    <div class="selection-summary">
+      <div class="selection-info">
+        <span class="selection-count">{{ getSelectedCount() }} equipamento(s) selecionado(s)</span>
+        @if (donationCart && donationCart.donorAccountId && getDonorInfo(donationCart.donorAccountId)) {
+        <span class="donor-info-summary">
+          doador:
+          <span class="donor-name">{{ getDonorInfo(donationCart.donorAccountId)!.name ||
+            getDonorInfo(donationCart.donorAccountId)!.businessName }}</span>
+          <span class="donor-location">({{ getDonorInfo(donationCart.donorAccountId)!.address.city }}, {{
+            getDonorInfo(donationCart.donorAccountId)!.address.state }})</span>
+        </span>
+        }
+      </div>
+      <div class="selection-actions">
+        <button (click)="clearSelection()" type="button" class="btn btn-secondary">
+          Limpar Seleção
+        </button>
+        <button (click)="proceedToDonation()" type="button" class="btn btn-primary">
+          Solicitar Doação
+        </button>
+      </div>
+    </div>
+    }
+
+    @if (loading) {
+    <div class="loading-spinner">Carregando equipamentos...</div>
+    } @else if (error) {
+    <div class="error-message">
+      <p>{{ error }}</p>
+      <button (click)="refreshEquipments()" type="button" class="btn btn-primary">
+        Tentar Novamente
+      </button>
+    </div>
+    } @else {
+    @if (equipments.length === 0) {
+    <div class="empty-state">
+      <p>Nenhum equipamento disponível no momento.</p>
+      <p>Volte mais tarde para ver novos equipamentos.</p>
+    </div>
+    }
+    <div class="equipment-grid">
+      @for (equipment of equipments; track equipment.id) {
+      <div class="equipment-card" [class.selected]="isEquipmentSelected(equipment.id)"
+        [class.selectable]="canSelectEquipment(equipment)" [class.disabled]="!canSelectEquipment(equipment)">
+
+        <div class="selection-checkbox" (click)="toggleEquipmentSelection(equipment, $event)">
+          <input type="checkbox" [checked]="isEquipmentSelected(equipment.id)"
+            [disabled]="!canSelectEquipment(equipment)" readonly>
+        </div>
+
+        <div class="equipment-image-container">
+          @if (getEquipmentImageUrl(equipment.id)) {
+          <img [src]="getEquipmentImageUrl(equipment.id)" alt="Foto do equipamento" class="equipment-browse-image" />
+          } @else {
+          <div class="no-image-placeholder rectangular equipment-browse-placeholder">
+            <i class="placeholder-icon">📷</i>
+          </div>
+          }
+        </div>
+
+        <div class="equipment-content">
+          <div class="equipment-header">
+            <span class="equipment-type">{{ getEquipmentTypeLabel(equipment.type) }}</span>
+            <span class="equipment-status available">Disponível</span>
+          </div>
+
+          <div class="equipment-description">
+            <p>{{ equipment.description }}</p>
+          </div>
+
+          @if (getDonorInfo(equipment.donorAccountId)) {
+          <div class="donor-info">
+            <small class="donor-name">
+              Doador: {{ getDonorInfo(equipment.donorAccountId)!.name ||
+              getDonorInfo(equipment.donorAccountId)!.businessName }}
+            </small>
+            <small class="donor-location">
+              {{ getDonorInfo(equipment.donorAccountId)!.address.city }}, {{
+              getDonorInfo(equipment.donorAccountId)!.address.state }}
+            </small>
+          </div>
+          }
+
+          <div class="equipment-footer">
+            <div class="equipment-dates">
+              <small>Disponível desde: {{ formatDate(equipment.avaiabilityDate) }}</small>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm"
+              (click)="$event.stopPropagation(); viewEquipment(equipment.id)">
+              Ver Detalhes
+            </button>
+          </div>
+        </div>
+      </div>
+      @if (equipments.length > 0 && hasMoreItems) {
+      <div class="pagination-controls"> <button (click)="loadMoreEquipments()" type="button" class="btn btn-secondary"
+          [disabled]="loading">
+          @if (loading) {
+          <span>Carregando...</span>
+          } @else {
+          <span>Carregar Mais</span>
+          }
+        </button>
+      </div>
+      }
+      }
+    </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,95 @@
+.login-form-container {
+  width: 100%;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--dark-grey);
+  font-size: 0.9rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  background-color: var(--bg-color);
+}
+
+.form-control:focus {
+  outline: none;
+  background-color: var(--bg-color-card);
+  box-shadow: var(--box-shadow);
+}
+
+.form-control.is-invalid {
+  border-color: var(--error-color);
+  background-color: #fff5f5;
+}
+
+.form-control.is-invalid:focus {
+  border-color: var(--error-color);
+  box-shadow: var(--box-shadow);
+}
+
+.forgot-password {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.link {
+  text-decoration: none;
+  font-size: var(--body-p-small-size);
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .form-control {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
+  }
+
+  .btn {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+  }
+}
+/* Contas de exemplo (modo demonstração) */
+.demo-box {
+  border: 1px dashed var(--primary-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.demo-title {
+  font-weight: 600;
+  margin: 0 0 var(--spacing-md);
+}
+
+.demo-accounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.demo-note {
+  font-size: var(--body-p-small-size);
+  margin: var(--spacing-md) 0 0;
+}

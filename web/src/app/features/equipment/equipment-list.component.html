@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h2>Meus Equipamentos</h2>
+      <button (click)="createEquipment()" type="button" class="btn btn-primary">
+        Cadastrar Equipamento
+      </button>
+    </div>
+
+    @if (loading) {
+    <div class="loading-spinner">Carregando equipamentos...</div>
+    } @else if (error) { <div class="error-message">{{ error }}</div>
+    <button (click)="refreshEquipments()" type="button" class="btn btn-secondary">
+      Tentar Novamente
+    </button>
+    } @else {
+    @if (equipments.length === 0) { <div class="empty-state">
+      <p>Você ainda não cadastrou nenhum equipamento.</p>
+      <button (click)="createEquipment()" type="button" class="btn btn-primary">
+        Cadastrar Primeiro Equipamento
+      </button>
+    </div>
+    } @else {
+    <div class="equipment-grid">
+      @for (equipment of equipments; track equipment.id) {
+      <div class="equipment-card" (click)="viewEquipment(equipment.id)">
+        <div class="equipment-header">
+          <div class="equipment-image-container">
+            @if (getEquipmentImageUrl(equipment.id)) {
+            <img [src]="getEquipmentImageUrl(equipment.id)" alt="Foto do equipamento" class="equipment-list-image" />
+            } @else {
+            <div class="no-image-placeholder rectangular equipment-list-placeholder">
+              <i class="placeholder-icon">📷</i>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="equipment-content">
+          <div class="equipment-description">
+            <h3>{{ equipment.description }}</h3>
+            <div class="equipment-meta">
+              <span class="equipment-type">{{ getTypeLabel(equipment.type) }}</span>
+              <span class="equipment-status" [class]="getStatusClass(equipment.status)">
+                {{ getStatusLabel(equipment.status) }}
+              </span>
+            </div>
+          </div>
+          <div class="equipment-dates">
+            @if (equipment.avaiabilityDate) {
+            <div class="date-info">
+              <label>Disponível em:</label>
+              <span>{{ formatDate(equipment.avaiabilityDate) }}</span>
+            </div>
+            }
+
+            @if (equipment.donationDate) {
+            <div class="date-info">
+              <label>Data de doação:</label>
+              <span>{{ formatDate(equipment.donationDate) }}</span>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="equipment-footer">
+          <button type="button" class="btn btn-secondary btn-sm">Ver Detalhes</button>
+        </div>
+      </div> }
+    </div>
+
+    @if (equipments.length > 0 && hasMoreItems) { <div class="pagination-controls">
+      <button (click)="loadMoreEquipments()" type="button" class="btn btn-secondary" [disabled]="loading">
+        @if (loading) {
+        Carregando...
+        } @else {
+        Carregar Mais
+        }
+      </button>
+    </div>
+    }
+    }
+    }
+  </div>
+</div>

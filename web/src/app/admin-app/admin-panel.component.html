@@ -1,0 +1,114 @@
+<div class="admin-panel">
+  <div class="admin-breadcrumb">
+    <a routerLink="/admin" class="breadcrumb-link">
+      <i class="bi bi-house"></i>
+      Dashboard
+    </a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-current">Painel Administrativo</span>
+  </div>
+
+  <div class="header">
+    <h1>Painel Administrativo</h1>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-navigation">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'users'"
+      (click)="setActiveTab('users')">
+      <i class="bi bi-people"></i>
+      Usuários
+    </button>
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'donations'"
+      (click)="setActiveTab('donations')">
+      <i class="bi bi-gift"></i>
+      Doações
+    </button>
+  </div>
+
+  <!-- Users Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'users'">
+    <div class="loading-container" *ngIf="isLoadingUsers">
+      <div class="loading-spinner"></div>
+      <p>Carregando usuários...</p>
+    </div>
+
+    <div class="users-table" *ngIf="!isLoadingUsers">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Documento</th>
+            <th>Tipo</th>
+            <th>Data de Criação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let userWithAccount of usersWithAccounts">
+            <td>{{ getUserDisplayName(userWithAccount) }}</td>
+            <td>{{ userWithAccount.user.email }}</td>
+            <td>{{ getUserDocument(userWithAccount) }}</td>
+            <td>
+              <span class="role-badge" [class]="'role-' + (userWithAccount.user.isAdmin ? 'admin' : userWithAccount.account?.role?.toLowerCase() || 'unknown')">
+                {{ getUserRole(userWithAccount) }}
+              </span>
+            </td>
+            <td>{{ formatDateTime(userWithAccount.user.createdAt) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="empty-state" *ngIf="usersWithAccounts.length === 0">
+        <i class="bi bi-people"></i>
+        <p>Nenhum usuário encontrado</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donations Tab -->
+  <div class="tab-content" *ngIf="activeTab === 'donations'">
+    <div class="loading-container" *ngIf="isLoadingDonations">
+      <div class="loading-spinner"></div>
+      <p>Carregando doações...</p>
+    </div>
+
+    <div class="donations-table" *ngIf="!isLoadingDonations">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Status</th>
+            <th>Equipamentos</th>
+            <th>Data de Criação</th>
+            <th>Última Atualização</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let donation of donations">
+            <td>{{ donation.id }}</td>
+            <td>
+              <span class="donation-status" [class]="getStatusClass(donation.status)">
+                {{ getStatusLabel(donation.status) }}
+              </span>
+            </td>
+            <td>{{ donation.equipments.length }} item(s)</td>
+            <td>{{ formatDateTime(donation.createdAt) }}</td>
+            <td>{{ formatDateTime(donation.updatedAt) }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="empty-state" *ngIf="donations.length === 0">
+        <i class="bi bi-gift"></i>
+        <p>Nenhuma doação encontrada</p>
+      </div>
+    </div>
+  </div>
+
+  <app-toast-container></app-toast-container>
+</div>

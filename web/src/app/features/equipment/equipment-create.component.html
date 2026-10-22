@@ -1,0 +1,122 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h2 class="title">Cadastrar Equipamento</h2>
+      <button (click)="goBack()" class="btn btn-secondary btn-sm">
+        ← Voltar
+      </button>
+    </div>
+
+    @if (error) {
+    <div class="error-message">{{ error }}</div>
+    }
+
+    <form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()" class="equipment-form">
+      <div class="form-group">
+        <label for="description" class="form-label">Descrição do Equipamento</label>
+        <textarea id="description" formControlName="description" class="form-control" rows="4"
+          placeholder="Descreva detalhadamente o equipamento que você está doando..."
+          [class.is-invalid]="description?.invalid && description?.touched">
+        </textarea>
+        @if (description?.invalid && description?.touched) {
+        <div class="invalid-feedback">
+          @if (description?.errors?.['required']) {
+          A descrição é obrigatória.
+          }
+          @if (description?.errors?.['minlength']) {
+          A descrição deve ter pelo menos 10 caracteres.
+          }
+          @if (description?.errors?.['maxlength']) {
+          A descrição deve ter no máximo 500 caracteres.
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label for="type" class="form-label">Tipo do Equipamento</label>
+        <select id="type" formControlName="type" class="form-control"
+          [class.is-invalid]="type?.invalid && type?.touched">
+          <option value="">Selecione um tipo</option>
+          @for (equipmentType of equipmentTypes; track equipmentType.value) {
+          <option [value]="equipmentType.value">{{ equipmentType.label }}</option>
+          }
+        </select>
+        @if (type?.invalid && type?.touched) {
+        <div class="invalid-feedback">
+          @if (type?.errors?.['required']) {
+          O tipo é obrigatório.
+          }
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Foto do Equipamento</label>
+        <div class="equipment-image-container">
+          <div class="equipment-image-wrapper">
+            @if (equipmentImageUrl) {
+              <img [src]="equipmentImageUrl" alt="Foto do equipamento" class="equipment-image" />
+              <button 
+                type="button" 
+                class="btn btn-danger btn-sm remove-image-btn"
+                (click)="removeEquipmentImage()"
+                title="Remover imagem">
+                ✕
+              </button>
+            } @else {
+              <div class="no-image-placeholder rectangular">
+                <i class="placeholder-icon">📷</i>
+                <p>Nenhuma foto</p>
+              </div>
+            }
+          </div>
+          
+          <div class="image-upload-controls">
+            <input 
+              type="file" 
+              id="equipmentImageInput"
+              accept="image/*"
+              (change)="onFileSelected($event)"
+              class="file-input"
+              #fileInput />
+            
+            <button type="button" class="btn btn-primary btn-sm" (click)="fileInput.click()">
+              Escolher Arquivo
+            </button>
+          </div>
+        </div>
+        <small class="form-text">Adicione uma foto do equipamento (opcional)</small>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="avaiabilityDate" class="form-label">Data de Disponibilidade</label>
+          <input type="date" id="avaiabilityDate" formControlName="avaiabilityDate" class="form-control"
+            [class.is-invalid]="avaiabilityDate?.invalid && avaiabilityDate?.touched">
+          @if (avaiabilityDate?.invalid && avaiabilityDate?.touched) {
+          <div class="invalid-feedback">
+            @if (avaiabilityDate?.errors?.['required']) {
+            A data de disponibilidade é obrigatória.
+            }
+          </div>
+          }
+          <small class="form-text">Quando o equipamento estará disponível para doação</small>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" (click)="goBack()" class="btn btn-secondary">
+          Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary" [disabled]="equipmentForm.invalid || isSubmitting">
+          @if (isSubmitting) {
+          Cadastrando...
+          } @else {
+          Cadastrar Equipamento
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

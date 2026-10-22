@@ -1,0 +1,25 @@
+<!-- Admin Application Layout - Completely separate from main app -->
+<div class="admin-application">
+  <header class="admin-header">
+    <div class="admin-header-content">
+      <div class="admin-logo">
+        <h1>DoeTech Admin</h1>
+      </div>
+      <div class="admin-actions">
+        <span class="admin-user">{{ currentUser?.email }}</span>
+        <button class="btn btn-outline-light" (click)="logout()">
+          <i class="bi bi-box-arrow-right"></i>
+          Sair
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="admin-container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+</div>
+
+<app-toast-container></app-toast-container>

@@ -1,0 +1,81 @@
+<div class="auth-container">
+  <div class="card auth-card">
+    <div class="auth-forms">
+      <div class="login-section">
+        <div class="form-header">
+          <h1>FAÇA SEU LOGIN</h1>
+          <p>Já tem uma conta? Faça login para continuar, ou <a routerLink="/register" class="register-link">cadastre-se</a></p>
+        </div>
+
+        @if (successMessage) {
+          <div class="alert alert-success">{{ successMessage }}</div>
+        }
+
+        @if (demo) {
+          <div class="demo-box">
+            <p class="demo-title">Demonstração: entre com uma conta de exemplo</p>
+            <div class="demo-accounts">
+              @for (account of demo.accounts; track account.email) {
+                <button type="button" class="btn btn-secondary demo-account" (click)="useDemo(account.email)">
+                  {{ account.role }}
+                </button>
+              }
+            </div>
+            <p class="demo-note">Senha: <code>{{ demo.password }}</code>. Tudo volta ao estado inicial todo dia às {{ demo.resetsAt }}.</p>
+          </div>
+        }
+
+        <div class="login-form-container">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+            <div class="form-group">
+              <label for="login-email" class="form-label">Email</label>
+              <input 
+                type="email" 
+                id="login-email" 
+                formControlName="email" 
+                class="form-control"
+                [class.is-invalid]="emailControl?.invalid && emailControl?.touched"
+                placeholder="Digite seu email">
+              @if (emailControl?.invalid && emailControl?.touched) {
+                <div class="error-message">
+                  {{ getEmailErrorMessage() }}
+                </div>
+              }
+            </div>
+
+            <div class="form-group">
+              <label for="login-password" class="form-label">Senha</label>
+              <input 
+                type="password" 
+                id="login-password" 
+                formControlName="password" 
+                class="form-control"
+                [class.is-invalid]="passwordControl?.invalid && passwordControl?.touched"
+                placeholder="Digite sua senha">
+              @if (passwordControl?.invalid && passwordControl?.touched) {
+                <div class="error-message">
+                  {{ getPasswordErrorMessage() }}
+                </div>
+              }
+            </div>
+
+            @if (errorMessage) {
+              <div class="error-message global-error">{{ errorMessage }}</div>
+            }
+
+            <button 
+              type="submit" 
+              class="btn btn-primary btn-full-width"
+              [disabled]="loginForm.invalid || isSubmitting">
+              {{ isSubmitting ? 'Entrando...' : 'Entrar' }}
+            </button>
+
+            <div class="forgot-password">
+              <a routerLink="/recover-password" class="link">Esqueceu sua senha?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

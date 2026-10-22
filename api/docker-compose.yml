@@ -1,0 +1,15 @@
+# Postgres para desenvolvimento: `docker compose up -d` aqui e `dotnet run`
+# (appsettings.Development.json já aponta para ele).
+services:
+  postgres:
+    image: postgres:17-alpine
+    ports:
+      - "127.0.0.1:5432:5432"
+    environment:
+      POSTGRES_DB: doetech
+      POSTGRES_PASSWORD: dev
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

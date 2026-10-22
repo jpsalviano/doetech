@@ -1,0 +1,52 @@
+<section class="how-it-works-section">
+  <div class="container">
+    <div class="how-it-works-header">
+      <span class="how-it-works-tagline">COMO FUNCIONA</span>
+      <h1 class="how-it-works-title">Conectando doadores e beneficiários</h1>
+    </div>
+    <app-how-it-works-modal
+      [isOpen]="modalOpen"
+      [page]="modalPage"
+      [content]="modalContent"
+      (close)="closeModal()"
+      (pageChange)="setModalPage($event)"
+    ></app-how-it-works-modal>
+    <div class="how-it-works-content">
+      <div class="how-it-works-side">
+        <img
+          class="how-it-works-image"
+          src="assets/bg-home.webp"
+          alt="Notebook e outros dispositivos eletrônicos retirados da caixa"
+        />
+        <h1 class="how-it-works-title">DOANDO UM EQUIPAMENTO</h1>
+        <p>
+          Transforme tecnologia usada em inclusão digital.
+        </p>
+        <div>
+          <a (click)="openModal(0)" style="cursor:pointer;"><p class="">Saiba mais.</p></a>
+        </div>
+      </div>
+      <div class="how-it-works-middle">
+        <img
+          src="assets/icon.jpg"
+          alt="Notebook e outros dispositivos eletrônicos retirados da caixa"
+        />
+      </div>
+      <div class="how-it-works-side">
+        <img
+          class="how-it-works-image"
+          src="assets/bg-home.webp"
+          alt="Notebook e outros dispositivos eletrônicos retirados da caixa"
+        />
+        <h1 class="how-it-works-title">RECEBENDO UM EQUIPAMENTO</h1>
+        <p>
+          Contribua para a economia circular e a sustentabilidade.
+        </p>
+        <div>
+          <a (click)="openModal(1)" style="cursor:pointer;"><p class="">Saiba mais.</p></a>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>

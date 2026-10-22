@@ -1,0 +1,25 @@
+cff-version: 1.0.1
+message: Please cite this software using these metadata.
+title: DoeTech
+authors:
+  - family-names: Marcelino Azevedo 
+    given-names: Diovane
+  - family-names: Nery Lunkes
+    given-names: Felipe Miguel
+  - family-names: Fernandes Salviano
+    given-names: João Paulo
+  - family-names: Hoffmann Fernandes Adler
+    given-names: Verônica
+  - name-suffix: Professor
+    affiliation: PUC Minas
+    family-names: Jeunon de Alencar
+    given-names: Bernardo
+keywords:
+  - Doação
+  - Tecnologia
+  - Objetivos do Milênio
+  - Reutilização
+repository-code: 
+license: BSD-3-CLAUSE
+version: 1.0.0
+date-released: 2025-07-31

@@ -1,0 +1,39 @@
+<header>
+  <div class="container">
+    <div class="logo-container">
+      <a routerLink="/"><img src="assets/logo.jpeg" alt="logo"></a>
+    </div>
+    <button type="button" class="menu-toggle" (click)="menuOpen = !menuOpen"
+            [attr.aria-expanded]="menuOpen" aria-controls="site-menu" aria-label="Menu">
+      <i class="bi" [class.bi-list]="!menuOpen" [class.bi-x-lg]="menuOpen"></i>
+    </button>
+    <nav class="navigation" id="site-menu" [class.open]="menuOpen" (click)="menuOpen = false">
+      <ul>
+        <li><a routerLink="/">Início</a></li>
+        <li><a routerLink="/about">Sobre</a></li>
+        <li><a routerLink="/solutions">Serviços</a></li>
+        <li><a routerLink="/how-it-works">Como funciona</a></li>
+      </ul>
+      <div class="button-container">
+        @if (!isLoggedIn) {
+        <button routerLink="/login" class="btn btn-secondary">Login</button>
+        } @else {        <button [routerLink]="equipmentRoute" class="btn btn-icon btn-equipment" title="Meus Equipamentos">
+          <i class="bi bi-pc-display"></i>
+        </button>
+        @if (showDonationList) {
+        <button [routerLink]="donationListRoute" class="btn btn-icon btn-donations" [title]="donationListTitle">
+          <i class="bi bi-gift"></i>
+        </button>
+        }
+        <app-notification></app-notification>
+        <button routerLink="/profile" class="btn btn-icon btn-profile" title="Meu Perfil">
+          <i class="bi bi-person-circle"></i>
+        </button>
+        <button (click)="logout()" class="btn btn-icon btn-logout" title="Sair">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+        }
+      </div>
+    </nav>
+  </div>
+</header>

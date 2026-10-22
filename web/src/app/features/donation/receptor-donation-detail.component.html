@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="card">
+    <div class="header">
+      <h2>Detalhes da Doação</h2>
+      <button (click)="goBack()" class="btn btn-secondary">
+        ← Voltar
+      </button>
+    </div>
+
+    @if (loading) {
+    <div class="loading-spinner">Carregando doação...</div>
+    } @else if (error && !donation) {
+    <div class="error-message">{{ error }}</div>
+    <button (click)="loadDonation()" class="btn btn-secondary">
+      Tentar Novamente
+    </button>
+    } @else if (donation) {
+    <div class="donation-info">
+      <div class="info-section">
+        <h3>Informações da Doação</h3>
+        <div class="info-grid">
+          <div class="info-group">
+            <label>ID da Doação</label>
+            <p>{{ donation.id }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Status Atual</label>
+            <div class="donation-meta">
+              <span class="donation-status" [class]="getStatusClass(donation.status)">
+                {{ getStatusLabel(donation.status) }}
+              </span>
+            </div>
+          </div>
+
+          @if (donorAccount && !isLoadingDonor) {
+          <div class="info-group">
+            <label>Doador</label>
+            <p>{{ donorAccount.name || donorAccount.businessName }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Localização do Doador</label>
+            <p>{{ donorAccount.address.city }}, {{ donorAccount.address.state }}</p>
+          </div>
+          } @else if (isLoadingDonor) {
+          <div class="info-group">
+            <label>Doador</label>
+            <p>Carregando informações...</p>
+          </div>
+          }
+
+          <div class="info-group">
+            <label>Quantidade de Equipamentos</label>
+            <p>{{ donation.equipments.length }} item(s)</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h3>Equipamentos da Doação</h3>
+        @if (isLoadingEquipments) {
+        <div class="loading-spinner">Carregando equipamentos...</div>
+        } @else if (equipments.length > 0) {
+        <div class="equipments-grid">
+          @for (equipment of equipments; track equipment.id) {
+          <div class="equipment-card">
+            <div class="equipment-info">
+              <h4>{{ equipment.description }}</h4>
+              <div class="equipment-details">
+                <div class="info-group">
+                  <label>Tipo</label>
+                  <p class="equipment-type">{{ getTypeLabel(equipment.type) }}</p>
+                </div>
+              </div>
+              <button class="btn btn-secondary btn-sm btn-ver" [routerLink]="['/browse/equipment', equipment.id]">Ver</button>
+            </div>
+            <div class="equipment-image-container">
+              @if (getEquipmentImageUrl(equipment.id)) {
+              <img [src]="getEquipmentImageUrl(equipment.id)" alt="Foto do equipamento" class="equipment-image" />
+              } @else {
+              <div class="no-image-placeholder equipment-list-placeholder">
+                <i class="placeholder-icon">📷</i>
+              </div>
+              }
+            </div>
+          </div>
+          }
+        </div>
+        } @else {
+        <p>Nenhum equipamento encontrado para esta doação.</p>
+        }
+      </div>
+
+      <div class="info-section">
+        <h3>Datas</h3>
+        <div class="info-grid">
+          <div class="info-group">
+            <label>Criada em</label>
+            <p>{{ formatDateTime(donation.createdAt) }}</p>
+          </div>
+
+          <div class="info-group">
+            <label>Última Atualização</label>
+            <p>{{ formatDateTime(donation.updatedAt) }}</p>
+          </div>
+
+          @if (donation.finishedAt) {
+          <div class="info-group">
+            <label>Finalizada em</label>
+            <p>{{ formatDateTime(donation.finishedAt) }}</p>
+          </div>
+          }
+        </div>
+      </div>
+
+      <div class="actions-section">
+        <h3>Status da Doação</h3>
+        @if (isReceptor) {
+        <div class="donation-readonly">
+          <p>Como receptor, você pode visualizar o status da doação mas não alterá-lo. O doador é responsável por atualizar o status conforme o andamento da doação.</p>
+        </div>
+        }
+      </div>
+    </div>
+    }
+  </div>
+  <app-toast-container></app-toast-container>
+</div>
